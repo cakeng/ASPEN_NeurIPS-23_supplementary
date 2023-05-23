@@ -4,9 +4,7 @@ import time
 import os
 import sys
 import numpy as np
-from PIL import Image
 import torchvision
-from torchvision import transforms
 
 num_threads = os.cpu_count()
 torch.set_num_threads(num_threads)
@@ -36,7 +34,7 @@ print("Average time taken (" + str(number_of_iterations) + " runs) : %3.6f" % ((
 
 for b in range(batch_size):
     probabilities = torch.nn.functional.softmax(output[b], dim=0)
-    print ("Batch ", str(b), " results:")
+    print ("Batch ", str(b+1), " results:")
     with open("../files/imagenet_classes.txt", "r") as f:
         categories = [s.strip() for s in f.readlines()]
     top5_prob, top5_catid = torch.topk(probabilities, 5)

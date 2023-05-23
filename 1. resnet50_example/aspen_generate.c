@@ -2,8 +2,7 @@
 
 int main (int argc, char* argv[])
 {
-    
-    //Take batch size and number of generation iteration from args
+    //Take number of generation iteration from args
     int batch_size = 1;
     int num_iter = 1;
     if (argc == 2)
@@ -34,9 +33,9 @@ int main (int argc, char* argv[])
     // May take quite some time depending on your machine.
     nasm_t *aspen_nasm = apu_generate_nasm (aspen_dnn, batch_size, num_iter);
 
-    // If apu_generate_nasm() takes too long, use apu_create_nasm() instead,
-    // to create a NASM using a fixed number of nodes per layer.
-    // Usually, 50 ~ 100 nodes per layer is a good number to start with.
+    // // If apu_generate_nasm() takes too long, use apu_create_nasm() instead,
+    // // to create a NASM using a fixed number of nodes per layer.
+    // // Usually, 50 ~ 100 nodes per layer is a good number to start with.
     // nasm_t *aspen_nasm = apu_create_nasm (aspen_dnn, 100, batch_size); 
     
     // // Print the NASM (ASPEN Graph) for the DNN model.
