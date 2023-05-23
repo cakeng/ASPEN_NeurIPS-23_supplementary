@@ -37,7 +37,7 @@ print("Average time taken (" + str(number_of_iterations) + " runs) : %3.6f" % ((
 for b in range(batch_size):
     probabilities = torch.nn.functional.softmax(output[b], dim=0)
     print ("Batch ", str(b), " results:")
-    with open("imagenet_classes.txt", "r") as f:
+    with open("../files/imagenet_classes.txt", "r") as f:
         categories = [s.strip() for s in f.readlines()]
     top5_prob, top5_catid = torch.topk(probabilities, 5)
     for i in range(top5_prob.size(0)):

@@ -1,4 +1,4 @@
-#include "../aspen_files/aspen.h"
+#include "../files/aspen.h"
 
 // Helper functions
 
@@ -48,6 +48,8 @@ int main (int argc, char* argv[])
     double start_time = get_sec();
     for (int i = 0; i < number_of_iterations; i++)
     {
+        // Reset the Ready Pool.
+        rpool_reset (rpool);
         // Reset ninst (ASPEN graph node) states.
         rpool_reset_nasm (rpool, aspen_nasm);
         // Run the DSEs until the NASM is completed.
@@ -66,7 +68,7 @@ int main (int argc, char* argv[])
     for (int i = 0; i < batch_size; i++)
     {
         printf ("Batch %d results:\n", i+1);
-        get_prob_results ("imagenet_classes.txt", softmax_output + 1000*i, 1000);
+        get_prob_results ("../files/imagenet_classes.txt", softmax_output + 1000*i, 1000);
     }
     // Cleanup
     free (layer_output);
