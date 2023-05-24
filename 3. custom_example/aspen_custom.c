@@ -5,58 +5,10 @@ char *classes[] = {"plane", "car", "bird", "cat",
            "deer", "dog", "frog", "horse", "ship", "truck"};
 
 // Helper functions
-
 // Get current time in seconds
 double get_sec();
-// Softmax function
-void softmax (float *input, float *output, unsigned int num_batch, unsigned int num_elements);
-// Get top 5 results from the softmax output
+// Get the top result.
 void get_prob_results (float* probabilities, unsigned int num);
-
-void compare_float_arr (float *arr1, float *arr2, int size, float err)
-{
-    int miss = 0;
-    for (int i = 0; i < size; i++)
-    {
-        if (fabsf (arr1[i] - arr2[i]) > err)
-        {
-            if (miss < 10)
-                printf ("Arrays mismatch at index %d: %f != %f\n", i, arr1[i], arr2[i]);
-            miss++;
-        }
-    }
-    if (miss > 0)
-        printf ("Arrays mismatched at %d/%d indices. Exiting.\n", miss, size);
-    else
-        printf ("Arrays match!\n");
-}
-
-void* load_arr_a (char *file_path, unsigned int size)
-{
-    void *input = calloc (size, 1);
-    FILE *fptr = fopen(file_path, "rb");
-    if (fptr != NULL)
-    {
-        size_t num = fread (input, sizeof(char), size, fptr);
-        if (num < size)
-        {
-            fprintf (stderr, "Error: Failed to read file %s - Size mismatch. File size: %ld, Req. size: %d. Exiting.\n", 
-                file_path, num, size);
-            free (input);
-            fclose(fptr);
-            assert(0);
-            return NULL;
-        }
-        fclose(fptr);
-        return input;
-    }
-    else
-    {
-        fprintf(stderr, "Error: Failed to open file %s. Exiting.\n", file_path);
-        free (input);
-        return NULL;
-    }
-}
 
 int main (int argc, char* argv[])
 {
@@ -77,7 +29,7 @@ int main (int argc, char* argv[])
     print_aspen_build_info();
 
     // Parse DNN model specification from .cfg file and model weights from .bin file
-    aspen_dnn_t *aspen_dnn = apu_create_dnn("custom.cfg", "custom_weight.bin");
+    aspen_dnn_t *aspen_dnn = apu_create_dnn("../files/custom.cfg", "custom_weight.bin");
 
     // Print the DNN model specifications. 
     // Second argument is the verbosity level for model data (weights, bias, etc.)

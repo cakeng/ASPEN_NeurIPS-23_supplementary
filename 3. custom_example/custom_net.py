@@ -55,41 +55,41 @@ class Net(nn.Module):
         x = self.pool(F.relu(self.conv1(x))) # Layer 1 and 2
         x = self.pool(F.relu(self.conv2(x))) # Layer 3 and 4
         x = torch.flatten(x, 1) # flatten all dimensions except batch
-        x = self.fc1(x) # Layer 5
+        x = F.relu(self.fc1(x)) # Layer 5
         x = F.relu(self.fc2(x)) # Layer 6
         x = self.fc3(x) # Layer 7
         return x
 
 net = Net()
 
-# # Train the custom network
-# criterion = nn.CrossEntropyLoss()
-# optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
-# for epoch in range(4):  # loop over the dataset multiple times
+# Train the custom network
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+for epoch in range(4):  # loop over the dataset multiple times
 
-#     running_loss = 0.0
-#     for i, data in enumerate(trainloader, 0):
-#         # get the inputs; data is a list of [inputs, labels]
-#         inputs, labels = data
+    running_loss = 0.0
+    for i, data in enumerate(trainloader, 0):
+        # get the inputs; data is a list of [inputs, labels]
+        inputs, labels = data
 
-#         # zero the parameter gradients
-#         optimizer.zero_grad()
+        # zero the parameter gradients
+        optimizer.zero_grad()
 
-#         # forward + backward + optimize
-#         outputs = net(inputs)
-#         loss = criterion(outputs, labels)
-#         loss.backward()
-#         optimizer.step()
+        # forward + backward + optimize
+        outputs = net(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
 
-#         # print statistics
-#         running_loss += loss.item()
-#         if i % 1000 == 999:    # print every 1000 mini-batches
-#             print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 1000:.3f}')
-#             running_loss = 0.0
+        # print statistics
+        running_loss += loss.item()
+        if i % 1000 == 999:    # print every 1000 mini-batches
+            print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 1000:.3f}')
+            running_loss = 0.0
 
-# print('Finished Training')
+print('Finished Training')
 
-# torch.save(net.state_dict(), "custom.pth")
+torch.save(net.state_dict(), "custom.pth")
 
 # Load the custom network
 net.load_state_dict(torch.load("custom.pth"))
@@ -121,7 +121,7 @@ print()
 #   <data>
 #   DATA_END
 #   LAYER_END
-#   ...Repeat for tensors in the network...
+#   ..."LAYER:<layer_idx>" to "LAYER_END" are repeated for all tensors in the network...
 
 def dump_tensor (path, tensor, tensor_info_string):
     with open(path, "a") as f:
@@ -140,7 +140,7 @@ def dump_tensor (path, tensor, tensor_info_string):
         f.write("LAYER_END\n")
 
 path = "custom_weight.bin"
-print (net)
+# print (net)
 os.system ("echo ASPEN_DATA > " + path)
 layer_idx = 1
 # Dump the weights and biases of the model.
@@ -158,7 +158,3 @@ dump_tensor (path, net.fc3.bias, "LAYER:5\nTENSOR_TYPE:BIAS\n")
 # Dump the inputs of the network.
 np_arr = images.detach().numpy()
 np_arr.astype('float32').tofile("custom_input.tensor")
-
-# Dump the outputs of the network.
-np_arr = outputs.detach().numpy()
-np_arr.astype('float32').tofile("custom_output.tensor")
