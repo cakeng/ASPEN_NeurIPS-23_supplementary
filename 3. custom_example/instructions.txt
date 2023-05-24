@@ -4,7 +4,7 @@ TLDR -  Run the following commands to migrate your custom DNN to ASPEN:
 
 1. python3 custom_net.py
 2. gcc -o aspen_custom aspen_custom.c -I../files -L../files -laspen -lgomp -lm
-3. ./aspen_custom <num_iter>
+3. ./aspen_custom 20
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,7 +22,7 @@ TLDR -  Run the following commands to migrate your custom DNN to ASPEN:
     train the network, and save the trained model to "custom.pth". It will also run inference on 10 images.
     The results should be:
         Ground Truth:  cat ship ship plane frog frog car frog cat car 
-        Predicted:  cat ship ship plane frog frog car deer cat car 
+        Predicted:  cat ship ship plane frog frog car deer cat car (The prediction results may vary slightly depending on PyTorch version.)
     This custom network is not very accurate, but it is good enough for this example. 
     We will use it to demonstrate how to migrate a custom DNN to ASPEN.
 
@@ -111,7 +111,7 @@ TLDR -  Run the following commands to migrate your custom DNN to ASPEN:
     In our case, use "./aspen_generate 20" to generate the ASPEN graph for 20 iterations. 
     The results should be:
         Predicted:  cat ship ship plane frog frog car deer cat car
-    Which is the same as the results from "custom_net.py".
+    Or the same as your results from "custom_net.py".
     The source file "aspen_custom.c" contains more information.
 
 

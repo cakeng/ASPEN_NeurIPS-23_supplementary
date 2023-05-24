@@ -16,7 +16,9 @@ ASPEN has a dependency on OpenMP. The examples of this supplementary material ha
 
 To install requirements:
   ```install
-  sudo apt install gcc python3 python3-pip
+  sudo apt-get update
+  sudo apt install -y gcc python3 python3-pip
   pip3 install torch torchvision
   ```
+
 > We plan to release the ASPEN source code, but to keep anonymity we included a pre-compiled library of ASPEN for this supplementary material.

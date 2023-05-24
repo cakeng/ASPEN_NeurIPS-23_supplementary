@@ -49,8 +49,7 @@ TLDR -  Run the following commands to execute batched inference and multi-DNN co
     
 5.  The "aspen_generate.c" provides an example of generating an ASPEN graph for both the batched Resnet-50 and single VGG-16 graph.
     Run "gcc -o aspen_generate aspen_generate.c -I../files -L../files -laspen -lgomp -lm" to compile the code.
-    Run "./aspen_generate <num_iter>" to generate the ASPEN graph. Specify the number of iterations for the APU as arguments.
-    In our case, use "./aspen_generate 20" to generate the ASPEN graph for 20 iterations. 
+    Run "./aspen_generate" to generate the ASPEN graph. Number of nodes per layer is fixed to 100 in this example, but can be changed for better performance.
     Files "resnet50.aspen", "resnet50_B4.nasm", "vgg16.aspen", and "vgg16_B1.nasm" should be generated.
     The source file "aspen_generate.c" contains more information.
 

@@ -10,7 +10,7 @@ int main (int argc, char* argv[])
     }
     else 
     {
-        printf("Usage: ./aspen_generate <num_iter>\n");
+        printf("Usage: ./aspen_generate\n");
         return 0;
     }
 
