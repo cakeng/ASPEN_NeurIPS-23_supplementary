@@ -1,6 +1,6 @@
 # Supplementary material for ASPEN: Breaking Operator Barriers for Efficient Parallelization of Deep Neural Networks
 
-This is the supplementary material that was provided with the NeuralIPS 2023 submission "ASPEN: Breaking Operator Barriers for Efficient Parallelization of Deep Neural Networks". [[OpenReview Link](https://openreview.net/forum?id=eTp4RetK74)] [[NeurIPS 2023 Link](https://neurips.cc/virtual/2023/poster/70957)]
+This is the supplementary material that was provided with the NeurIPS 2023 submission "ASPEN: Breaking Operator Barriers for Efficient Parallelization of Deep Neural Networks". [[OpenReview Link](https://openreview.net/forum?id=eTp4RetK74)] [[NeurIPS 2023 Link](https://neurips.cc/virtual/2023/poster/70957)]
 
 The included files and code provides three simple examples and evaluations of the ASPEN inference system:
 
